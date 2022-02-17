@@ -2,6 +2,7 @@ const { exec, execSync } = require('child_process');
 const { existsSync } = require('fs');
 
 exports.push = async function push(link, username) {
+  link = username ? `https://github.com/${username}/${link}.git` : link;
   if (existsSync(__dirname + "/.git")) {
     execSync('git add .');
     execSync('git commit -m "Update"');
