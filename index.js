@@ -5,7 +5,6 @@ exports.push = async function push(link, username) {
   if (link == "-v") return console.log(require("./package.json").version);
   link = username ? `https://github.com/${username}/${link}.git` : link;
   let dirname = execSync('cd').toString().trim();
-  console.log(dirname + "/.git", existsSync(dirname + "/.git"));
   if (existsSync(dirname + "/.git")) {
     execSync('git add .');
     execSync('git commit -m "Update"');
