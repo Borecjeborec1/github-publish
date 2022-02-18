@@ -1,10 +1,12 @@
-const { exec, execSync } = require('child_process');
+const { execSync } = require('child_process');
 const { existsSync } = require('fs');
 
 exports.push = async function push(link, username) {
   if (link == "-v") return console.log(require("./package.json").version);
   link = username ? `https://github.com/${username}/${link}.git` : link;
-  if (existsSync(__dirname + "/.git")) {
+  let dirname = execSync('cd');
+  console.log(dirname + "/.git")
+  if (existsSync(dirname + "/.git")) {
     execSync('git add .');
     execSync('git commit -m "Update"');
     execSync('git push');
