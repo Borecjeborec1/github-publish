@@ -1,4 +1,5 @@
 #!/usr/bin/env node
 
 const app = require('../index.js');
-app.push(process.argv.splice(2));
+const args = process.argv.splice(2)
+app.push(args[0], args[1])
