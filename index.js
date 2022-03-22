@@ -3,7 +3,7 @@ const { existsSync } = require('fs');
 
 exports.push = async function push(link, username) {
   if (link == "-v") return console.log(require("./package.json").version);
-  link = username ? `https://github.com/${username}/${link}.git` : link;
+  link = username ? `https://github.com/${username}/${link}` : link;
   let dirname = execSync('cd').toString().trim();
   if (existsSync(dirname + "/.git")) {
     execSync('git add .');
@@ -16,7 +16,7 @@ exports.push = async function push(link, username) {
   execSync('git add .');
   execSync('git commit -m "Initial commit"');
   execSync('git branch -M main');
-  execSync('git remote add origin ' + link);
+  execSync(`git remote add origin ${link}`);
   execSync('git push -u origin main');
 }
 
