@@ -2,4 +2,4 @@
 
 const app = require('../index.js');
 const args = process.argv.splice(2)
-app.push(args[0], args[1])
+app.push(args[0])
