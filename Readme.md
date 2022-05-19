@@ -19,7 +19,9 @@ instead of
 ```shell
   github-publisher https://github.com/<username>/<reponame>.git
 ```
+
+For existing repos
 ```shell
-  github-publisher <reponame> <username>
+  github-publisher <commit>
 ```
 
