@@ -14,7 +14,6 @@ instead of
   git push -u origin main
 ```
 
-
 # Uses
 ```shell
   github-publisher https://github.com/<username>/<reponame>.git
