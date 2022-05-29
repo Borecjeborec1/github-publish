@@ -11,7 +11,7 @@ exports.push = async function push(link) {
     execSync('git push -u origin main');
   } else {
     execSync('git add .');
-    execSync('git commit -m "Update"');
+    execSync('git commit -m ' + link);
     execSync('git push');
   }
 
