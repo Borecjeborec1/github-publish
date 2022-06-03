@@ -1,6 +1,7 @@
 const { execSync } = require('child_process');
 
 exports.push = async function push(link) {
+  link = link.join(' ');
   if (link == "-v") return console.log(require("./package.json").version);
   if (link.startsWith("http")) {
     execSync('git init');
