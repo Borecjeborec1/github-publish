@@ -4,6 +4,7 @@ Github-publisher is simple library for pushing to github with 1 command
 ```shell
   github-publisher https://github.com/<username>/<reponame>.git
 ```
+
 instead of 
 ```shell
   git init
