@@ -24,3 +24,11 @@ For existing repos
   github-publisher <commit>
 ```
 
+Or even shorter
+```shell
+  gp https://github.com/<username>/<reponame>.git
+```
+For existing repos
+```shell
+  gp <commit>
+```
