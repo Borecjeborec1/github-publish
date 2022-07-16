@@ -1,10 +1,11 @@
 {
   "name": "github-publisher",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "publish to github repo with 1 line",
   "main": "index.js",
   "bin": {
-    "github-publisher": "bin/index.js"
+    "github-publisher": "bin/index.js",
+    "gp": "bin/index.js"
   },
   "keywords": [
     "github",
