@@ -17,18 +17,16 @@ instead of
 
 # Uses
 ```shell
+  # For creating repo
   github-publisher https://github.com/<username>/<reponame>.git
-```
-For existing repos
-```shell
+  # For existing repos
   github-publisher <commit>
 ```
 
 Or even shorter
 ```shell
+  # For creating repo
   gp https://github.com/<username>/<reponame>.git
-```
-For existing repos
-```shell
+  # For existing repos
   gp <commit>
 ```
