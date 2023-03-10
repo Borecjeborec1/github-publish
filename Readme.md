@@ -29,4 +29,5 @@ Or even shorter
   gp https://github.com/<username>/<reponame>.git
   # For existing repos
   gp <commit>
+  
 ```
