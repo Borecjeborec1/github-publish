@@ -1,6 +1,6 @@
 {
   "name": "github-publisher",
-  "version": "1.3.4",
+  "version": "1.3.5",
   "description": "publish to github repo with 1 line",
   "main": "index.js",
   "bin": {
