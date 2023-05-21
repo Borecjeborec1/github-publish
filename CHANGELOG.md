@@ -4,6 +4,7 @@
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
 
 ##### Implemented enhancements:
+-  shortened the showed git hash ([#bdde750](https://github.com/Borecjeborec1/github-publisher/commit/bdde7505dd88e5413dc88fe496d89709095f0c97))
 -  added links to individual commits ([fbf92e107f6d8bf30691a492170a27034072660a](https://github.com/Borecjeborec1/github-publisher/commit/fbf92e107f6d8bf30691a492170a27034072660a)) 
 
 ##### Fixed bugs:

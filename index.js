@@ -65,9 +65,9 @@ function updateChangelog(version, message, type, repo) {
 
   const changelogContent = fs.readFileSync(changelogPath, 'utf8').split("#### [");
   const currentDate = new Date().toISOString().split('T')[0];
-
   function getCommitLink(commitHash) {
-    return `[${commitHash}](${repo}/commit/${commitHash})`;
+    const shortHash = commitHash.substring(0, 7); // Get the first 7 characters of the commit hash
+    return `[#${shortHash}](${repo}/commit/${commitHash})`;
   }
   const GH_SHA = execSync("git log -1 --format=\" % H\"").toString().trim()
   function getNewContent() {
