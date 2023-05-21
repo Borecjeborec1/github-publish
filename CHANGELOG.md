@@ -1,4 +1,13 @@
 # Changelog
+#### [1.3.3] - 2023-05-21
+
+[Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
+
+##### Implemented enhancements:
+-  keywords inside packageJSON 
+
+##### Fixed bugs:
+
 #### [1.3.1] - 2023-05-21
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
 
