@@ -1,4 +1,13 @@
 # Changelog
+#### [1.3.4] - 2023-05-21
+
+[Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
+
+##### Implemented enhancements:
+-  added links to individual commits ([fbf92e107f6d8bf30691a492170a27034072660a](https://github.com/Borecjeborec1/github-publisher/commit/fbf92e107f6d8bf30691a492170a27034072660a)) 
+
+##### Fixed bugs:
+
 #### [1.3.3] - 2023-05-21
 
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)

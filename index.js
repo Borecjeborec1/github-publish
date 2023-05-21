@@ -59,40 +59,49 @@ exports.push = async function push(link) {
 
 
 function updateChangelog(version, message, type, repo) {
-  const changelogPath = "./CHANGELOG.md"
+  const changelogPath = "./CHANGELOG.md";
   if (!fs.existsSync(changelogPath))
-    fs.writeFileSync(changelogPath, "")
+    fs.writeFileSync(changelogPath, "");
 
   const changelogContent = fs.readFileSync(changelogPath, 'utf8').split("#### [");
   const currentDate = new Date().toISOString().split('T')[0];
 
-  function getnewContent() {
+  function getCommitLink(commitHash) {
+    return `[${commitHash}](${repo}/commit/${commitHash})`;
+  }
+  const GH_SHA = execSync("git log -1 --format=\" % H\"").toString().trim()
+  function getNewContent() {
     for (let i in changelogContent) {
       if (changelogContent[i].includes(version)) {
-        console.log(`Added ${message} to ${type} in ${changelogPath} version v${version}`)
-        if (type == "feature") {
-          changelogContent[i] = changelogContent[i].replace(`##### Implemented enhancements:`, `##### Implemented enhancements:\n- ${message}`)
-          return changelogContent.join("#### [")
-        }
-        else if (type == "bugfix") {
-          changelogContent[i] = changelogContent[i].replace(`##### Fixed bugs:`, `##### Fixed bugs:\n- ${message}`)
-          return changelogContent.join("#### [")
+        console.log(`Added ${message} to ${type} in ${changelogPath} version v${version}`);
+        if (type === "feature") {
+          changelogContent[i] = changelogContent[i].replace(
+            `##### Implemented enhancements:`,
+            `##### Implemented enhancements:\n- ${message} (${getCommitLink(GH_SHA)})`
+          );
+          return changelogContent.join("#### [");
+        } else if (type === "bugfix") {
+          changelogContent[i] = changelogContent[i].replace(
+            `##### Fixed bugs:`,
+            `##### Fixed bugs:\n- ${message} (${getCommitLink(GH_SHA)})`
+          );
+          return changelogContent.join("#### [");
         }
       }
     }
-    let structure = ""
-    if (type == "feature") {
+    let structure = "";
+    if (type === "feature") {
       structure = `# Changelog
 #### [${version}] - ${currentDate}
 
 [Full Changelog](${repo}/commits/main)
 
 ##### Implemented enhancements:
-- ${message} 
+- ${message} (${getCommitLink(GH_SHA)}) 
 
 ##### Fixed bugs:
-`
-    } else if (type == "bugfix") {
+`;
+    } else if (type === "bugfix") {
       structure = `# Changelog
 #### [${version}] - ${currentDate}
 [Full Changelog](${repo}/commits/main)
@@ -100,12 +109,12 @@ function updateChangelog(version, message, type, repo) {
 ##### Implemented enhancements:
 
 ##### Fixed bugs:
-- ${message}
-`
+- ${message} (${getCommitLink(GH_SHA)})
+`;
     }
-    console.log(`Created new version v${version} with ${message} inside ${type}`)
-    return structure + changelogContent.join("#### [").replace("# Changelog", "")
+    console.log(`Created new version v${version} with ${message} inside ${type}`);
+    return structure + changelogContent.join("#### [").replace("# Changelog", "");
   }
 
-  fs.writeFileSync(changelogPath, getnewContent())
+  fs.writeFileSync(changelogPath, getNewContent());
 }
