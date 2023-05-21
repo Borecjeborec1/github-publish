@@ -3,28 +3,8 @@ const fs = require("fs")
 
 
 exports.push = async function push(link) {
-  projectVersion = ""
-  try {
-    let packageJSON = fs.readFileSync("./package.json", "utf-8")
-    let { version } = JSON.parse(packageJSON)
-    projectVersion = version
-  } catch (er) {
-    console.log("Couldnt find ./package.json")
-    return
-  }
-
-  let isFeature = link.includes("--feature") || link.includes("-F")
-  let isBugfix = link.includes("--bugfix") || link.includes("-B")
-  let type = isFeature ? "feature" : isBugfix ? "bugfix" : ""
-
-  link = link.join(' ').replace(/--feature|-F,--bugfix,-B/g, "");
   if (link == "-v") return console.log(require("./package.json").version);
-
-  let GHLink = execSync("git config --get remote.origin.url").toString().trim().replace(".git", "")
-  if (type.length)
-    updateChangelog(projectVersion, link, type, GHLink)
-
-  if (link.startsWith("http")) {
+  if (link[0].startsWith("http")) {
     const commands = [
       { command: 'git', args: ['init'] },
       { command: 'git', args: ['add', '.'] },
@@ -39,21 +19,42 @@ exports.push = async function push(link) {
       proc.stderr.pipe(process.stderr);
       await new Promise(resolve => proc.on('close', resolve));
     }
-  } else {
-    const proc = spawn('git', ['add', '.']);
-    proc.stdout.pipe(process.stdout);
-    proc.stderr.pipe(process.stderr);
-    await new Promise(resolve => proc.on('close', resolve));
-    const message = link.replace(/"/g, '\\"');
-    const commitProc = spawn('git', ['commit', '-m', message]);
-    commitProc.stdout.pipe(process.stdout);
-    commitProc.stderr.pipe(process.stderr);
-    await new Promise(resolve => commitProc.on('close', resolve));
-    const pushProc = spawn('git', ['push']);
-    pushProc.stdout.pipe(process.stdout);
-    pushProc.stderr.pipe(process.stderr);
-    await new Promise(resolve => pushProc.on('close', resolve));
+    return
   }
+
+  let projectVersion = ""
+  try {
+    let packageJSON = fs.readFileSync("./package.json", "utf-8")
+    let { version } = JSON.parse(packageJSON)
+    projectVersion = version
+  } catch (er) {
+    console.log("Couldnt find ./package.json")
+    return
+  }
+
+  let isFeature = link.includes("--feature") || link.includes("-F")
+  let isBugfix = link.includes("--bugfix") || link.includes("-B")
+  let type = isFeature ? "feature" : isBugfix ? "bugfix" : ""
+
+  link = link.join(' ').replace(/--feature|-F,--bugfix,-B/g, "");
+
+  let GHLink = execSync("git config --get remote.origin.url").toString().trim().replace(".git", "")
+  if (type.length)
+    updateChangelog(projectVersion, link, type, GHLink)
+
+  const proc = spawn('git', ['add', '.']);
+  proc.stdout.pipe(process.stdout);
+  proc.stderr.pipe(process.stderr);
+  await new Promise(resolve => proc.on('close', resolve));
+  const message = link.replace(/"/g, '\\"');
+  const commitProc = spawn('git', ['commit', '-m', message]);
+  commitProc.stdout.pipe(process.stdout);
+  commitProc.stderr.pipe(process.stderr);
+  await new Promise(resolve => commitProc.on('close', resolve));
+  const pushProc = spawn('git', ['push']);
+  pushProc.stdout.pipe(process.stdout);
+  pushProc.stderr.pipe(process.stderr);
+  await new Promise(resolve => pushProc.on('close', resolve));
 };
 
 
