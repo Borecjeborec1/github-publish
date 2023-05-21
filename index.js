@@ -1,8 +1,29 @@
-const { spawn } = require('child_process');
+const { spawn, execSync } = require('child_process');
+const fs = require("fs")
+
 
 exports.push = async function push(link) {
-  link = link.join(' ');
+  projectVersion = ""
+  try {
+    let packageJSON = fs.readFileSync("./package.json", "utf-8")
+    let { version } = JSON.parse(packageJSON)
+    projectVersion = version
+  } catch (er) {
+    console.log("Couldnt find ./package.json")
+    return
+  }
+
+  let isFeature = link.includes("--feature") || link.includes("-F")
+  let isBugfix = link.includes("--bugfix") || link.includes("-B")
+  let type = isFeature ? "feature" : isBugfix ? "bugfix" : ""
+
+  link = link.join(' ').replace(/--feature|-F,--bugfix,-B/g, "");
   if (link == "-v") return console.log(require("./package.json").version);
+
+  let GHLink = execSync("git config --get remote.origin.url").toString().trim().replace(".git", "")
+  if (type.length)
+    updateChangelog(projectVersion, link, type, GHLink)
+
   if (link.startsWith("http")) {
     const commands = [
       { command: 'git', args: ['init'] },
@@ -34,3 +55,56 @@ exports.push = async function push(link) {
     await new Promise(resolve => pushProc.on('close', resolve));
   }
 };
+
+
+function updateChangelog(version, message, type, repo) {
+  const changelogPath = "./CHANGELOG.md"
+  if (!fs.existsSync(changelogPath))
+    fs.writeFileSync(changelogPath, "")
+
+  const changelogContent = fs.readFileSync(changelogPath, 'utf8').split("#### [");
+  const currentDate = new Date().toISOString().split('T')[0];
+
+  function getnewContent() {
+    for (let i in changelogContent) {
+      if (changelogContent[i].includes(version)) {
+        console.log(`Added ${message} to ${type} in ${changelogPath} version v${version}`)
+        if (type == "feature") {
+          changelogContent[i] = changelogContent[i].replace(`##### Implemented enhancements:`, `##### Implemented enhancements:\n- ${message}`)
+          return changelogContent.join("#### [")
+        }
+        else if (type == "bugfix") {
+          changelogContent[i] = changelogContent[i].replace(`##### Fixed bugs:`, `##### Fixed bugs:\n- ${message}`)
+          return changelogContent.join("#### [")
+        }
+      }
+    }
+    let structure = ""
+    if (type == "feature") {
+      structure = `# Changelog
+#### [${version}] - ${currentDate}
+
+[Full Changelog](${repo}/commits/main)
+
+##### Implemented enhancements:
+- ${message} 
+
+##### Fixed bugs:
+`
+    } else if (type == "bugfix") {
+      structure = `# Changelog
+#### [${version}] - ${currentDate}
+[Full Changelog](${repo}/commits/main)
+
+##### Implemented enhancements:
+
+##### Fixed bugs:
+- ${message}
+`
+    }
+    console.log(`Created new version v${version} with ${message} inside ${type}`)
+    return structure + changelogContent.join("#### [").replace("# Changelog", "")
+  }
+
+  fs.writeFileSync(changelogPath, getnewContent())
+}
