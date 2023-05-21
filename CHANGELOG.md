@@ -3,10 +3,11 @@
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
 
 ##### Implemented enhancements:
-- -F readme
+- better readme
 
 ##### Fixed bugs:
-- -B fixed bug with newly created repos
+-  fixed the bug where flags were also written inside the changelog
+- fixed bug with newly created repos
 
 
 #### [1.3.0] - 2023-05-21
