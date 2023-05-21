@@ -6,7 +6,7 @@
 - better readme
 
 ##### Fixed bugs:
--  fixed the bug where flags were also written inside the changelog
+- fixed the bug where flags were also written inside the changelog
 - fixed bug with newly created repos
 
 

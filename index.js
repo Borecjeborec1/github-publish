@@ -36,7 +36,7 @@ exports.push = async function push(link) {
   let isBugfix = link.includes("--bugfix") || link.includes("-B")
   let type = isFeature ? "feature" : isBugfix ? "bugfix" : ""
 
-  link = link.join(' ').replace(/--feature|-F|--bugfix|-B/g, "");
+  link = link.join(' ').replace(/--feature|-F|--bugfix|-B/g, "").replace("  ", " ");
 
   let GHLink = execSync("git config --get remote.origin.url").toString().trim().replace(".git", "")
   if (type.length)
