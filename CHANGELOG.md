@@ -3,6 +3,7 @@
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
 
 ##### Implemented enhancements:
+- -F readme
 
 ##### Fixed bugs:
 - -B fixed bug with newly created repos
