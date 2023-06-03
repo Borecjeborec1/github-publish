@@ -1,4 +1,12 @@
 # Changelog
+#### [1.3.5] - 2023-06-03
+[Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
+
+##### Implemented enhancements:
+
+##### Fixed bugs:
+-  fixed bug where gp wouldnt push without package.json ([#166b0f5](https://github.com/Borecjeborec1/github-publisher/commit/166b0f547d65091633d534ad6facf1f661eae4df))
+
 #### [1.3.4] - 2023-05-21
 
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)

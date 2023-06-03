@@ -22,20 +22,22 @@ exports.push = async function push(link) {
     return
   }
 
-  let projectVersion = ""
-  try {
-    let packageJSON = fs.readFileSync("./package.json", "utf-8")
-    let { version } = JSON.parse(packageJSON)
-    projectVersion = version
-  } catch (er) {
-    console.log("Couldnt find ./package.json")
-    return
-  }
+
 
   let isFeature = link.includes("--feature") || link.includes("-F")
   let isBugfix = link.includes("--bugfix") || link.includes("-B")
   let type = isFeature ? "feature" : isBugfix ? "bugfix" : ""
-
+  let projectVersion = ""
+  if (type.length) {
+    try {
+      let packageJSON = fs.readFileSync("./package.json", "utf-8")
+      let { version } = JSON.parse(packageJSON)
+      projectVersion = version
+    } catch (er) {
+      console.log("Couldnt find ./package.json")
+      return
+    }
+  }
   link = link.join(' ').replace(/--feature|-F|--bugfix|-B/g, "").replace("  ", " ");
 
   let GHLink = execSync("git config --get remote.origin.url").toString().trim().replace(".git", "")
