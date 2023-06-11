@@ -3,6 +3,7 @@
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
 
 ##### Implemented enhancements:
+-  ignored minor version changelog ([#6017027](https://github.com/Borecjeborec1/github-publisher/commit/6017027d3cb56e3897a6d8477b53d62d501bff35))
 
 ##### Fixed bugs:
 -  fixed bug where gp wouldnt push without package.json ([#166b0f5](https://github.com/Borecjeborec1/github-publisher/commit/166b0f547d65091633d534ad6facf1f661eae4df))

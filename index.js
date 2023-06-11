@@ -32,14 +32,13 @@ exports.push = async function push(link) {
     try {
       let packageJSON = fs.readFileSync("./package.json", "utf-8")
       let { version } = JSON.parse(packageJSON)
-      projectVersion = version
+      projectVersion = version.split('.').slice(0, 2).join('.')
     } catch (er) {
       console.log("Couldnt find ./package.json")
       return
     }
   }
   link = link.join(' ').replace(/--feature|-F|--bugfix|-B/g, "").replace("  ", " ");
-
   let GHLink = execSync("git config --get remote.origin.url").toString().trim().replace(".git", "")
   if (type.length)
     updateChangelog(projectVersion, link, type, GHLink)
