@@ -1,5 +1,14 @@
 # Changelog
-#### [1.3.5] - 2023-06-03
+## [1.4] - 2023-06-14
+
+[Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
+
+##### Implemented enhancements:
+-  more visible heading in changelog ([#6cb150b](https://github.com/Borecjeborec1/github-publisher/commit/6cb150b5665949c707d0f30dbdfceaafed247d99)) 
+
+##### Fixed bugs:
+
+## [1.3.5] - 2023-06-03
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
 
 ##### Implemented enhancements:
@@ -8,7 +17,7 @@
 ##### Fixed bugs:
 -  fixed bug where gp wouldnt push without package.json ([#166b0f5](https://github.com/Borecjeborec1/github-publisher/commit/166b0f547d65091633d534ad6facf1f661eae4df))
 
-#### [1.3.4] - 2023-05-21
+## [1.3.4] - 2023-05-21
 
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
 
@@ -18,7 +27,7 @@
 
 ##### Fixed bugs:
 
-#### [1.3.3] - 2023-05-21
+## [1.3.3] - 2023-05-21
 
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
 
@@ -27,7 +36,7 @@
 
 ##### Fixed bugs:
 
-#### [1.3.1] - 2023-05-21
+## [1.3.1] - 2023-05-21
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
 
 ##### Implemented enhancements:
@@ -38,7 +47,7 @@
 - fixed bug with newly created repos
 
 
-#### [1.3.0] - 2023-05-21
+## [1.3.0] - 2023-05-21
 
 [Full Changelog](https://github.com/Borecjeborec1/github-publisher/commits/main)
 

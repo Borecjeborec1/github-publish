@@ -64,7 +64,7 @@ function updateChangelog(version, message, type, repo) {
   if (!fs.existsSync(changelogPath))
     fs.writeFileSync(changelogPath, "");
 
-  const changelogContent = fs.readFileSync(changelogPath, 'utf8').split("#### [");
+  const changelogContent = fs.readFileSync(changelogPath, 'utf8').split("## [");
   const currentDate = new Date().toISOString().split('T')[0];
   function getCommitLink(commitHash) {
     const shortHash = commitHash.substring(0, 7); // Get the first 7 characters of the commit hash
@@ -80,20 +80,20 @@ function updateChangelog(version, message, type, repo) {
             `##### Implemented enhancements:`,
             `##### Implemented enhancements:\n- ${message} (${getCommitLink(GH_SHA)})`
           );
-          return changelogContent.join("#### [");
+          return changelogContent.join("## [");
         } else if (type === "bugfix") {
           changelogContent[i] = changelogContent[i].replace(
             `##### Fixed bugs:`,
             `##### Fixed bugs:\n- ${message} (${getCommitLink(GH_SHA)})`
           );
-          return changelogContent.join("#### [");
+          return changelogContent.join("## [");
         }
       }
     }
     let structure = "";
     if (type === "feature") {
       structure = `# Changelog
-#### [${version}] - ${currentDate}
+## [${version}] - ${currentDate}
 
 [Full Changelog](${repo}/commits/main)
 
@@ -104,7 +104,7 @@ function updateChangelog(version, message, type, repo) {
 `;
     } else if (type === "bugfix") {
       structure = `# Changelog
-#### [${version}] - ${currentDate}
+## [${version}] - ${currentDate}
 [Full Changelog](${repo}/commits/main)
 
 ##### Implemented enhancements:
@@ -114,7 +114,7 @@ function updateChangelog(version, message, type, repo) {
 `;
     }
     console.log(`Created new version v${version} with ${message} inside ${type}`);
-    return structure + changelogContent.join("#### [").replace("# Changelog", "");
+    return structure + changelogContent.join("## [").replace("# Changelog", "");
   }
 
   fs.writeFileSync(changelogPath, getNewContent());
